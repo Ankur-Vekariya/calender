@@ -6,25 +6,17 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import dayjs from "dayjs";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
+import { theme } from "@/utils/theme";
 
 export default function Home() {
-  const windowSize = useRef([window.innerWidth, window.innerHeight]);
-  const [value, setValue] = React.useState(dayjs("2022-04-17"));
+  const windowWidth = useRef(window.innerWidth);
+  const windowHeight = useRef(window.innerHeight);
 
+  console.log("width: ", windowWidth.current);
+  console.log("height: ", windowWidth.current);
   return (
     <main className="flex  flex-col items-center justify-between p-24">
       {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -134,10 +126,12 @@ export default function Home() {
       </div> */}
 
       <Card
-        sx={{
-          minWidth: windowSize.current[0] - 300,
-          minHeight: windowSize.current[1] - 200,
-        }}
+        sx={
+          {
+            // minWidth: windowWidth - 1000 / 2,
+            // minHeight: windowHeight - 200,
+          }
+        }
       >
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -157,32 +151,11 @@ export default function Home() {
                   the Day Word of the Day Word of the Day Word of the Day
                 </Typography>
               </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  sx={{ fontSize: 14 }}
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  <LocalizationProvider
-                    dateAdapter={AdapterDayjs}
-                    sx={{ width: "100%", height: "100%" }}
-                  >
-                    <DemoContainer
-                      components={["DateCalendar", "DateCalendar"]}
-                      sx={{ width: "100%", height: "100%" }}
-                    >
-                      <DemoItem label="Controlled calendar">
-                        <DateCalendar
-                          sx={{ width: "100%", height: "100%" }}
-                          value={value}
-                          onChange={(newValue) => setValue(newValue)}
-                        />
-                      </DemoItem>
-                    </DemoContainer>
-                  </LocalizationProvider>
-                </Typography>
-              </Grid>
-              <Grid item xs>
+              <Grid
+                item
+                xs={6}
+                sx={{ backgroundColor: theme.black, borderRadius: 10 }}
+              >
                 <Typography
                   sx={{ fontSize: 14 }}
                   color="text.secondary"
@@ -193,6 +166,110 @@ export default function Home() {
                   the Day Word of the Day Word of the Day Word of the Day Word
                   of the Day Word of the Day Word of the Day
                 </Typography>
+                <Grid
+                  container
+                  rowSpacing={1}
+                  columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                >
+                  {/* <Grid item xs={6}>
+                    <Grid
+                      container
+                      rowSpacing={1}
+                      columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                    >
+                      <Grid item xs={6}>
+                        <Card
+                          sx={{
+                            maxWidth: "100%",
+                            minHeight: "100%",
+                            backgroundColor: theme.cream,
+                            borderRadius: 5,
+                          }}
+                        >
+                          <CardContent>
+                            <Typography
+                              sx={{ fontSize: 14 }}
+                              color="text.secondary"
+                              gutterBottom
+                            >
+                              Word of the Day
+                            </Typography>
+
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                              adjective
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                              adjective
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                              adjective
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Card
+                          sx={{
+                            maxWidth: "100%",
+                            minHeight: "100%",
+                            backgroundColor: theme.cream,
+                            borderRadius: 5,
+                          }}
+                        >
+                          <CardContent>
+                            <Typography
+                              sx={{ fontSize: 14 }}
+                              color="text.secondary"
+                              gutterBottom
+                            >
+                              Word of the Day
+                            </Typography>
+
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                              adjective
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Card
+                      sx={{
+                        maxWidth: "100%",
+                        minHeight: "100%",
+                        backgroundColor: theme.cream,
+                        borderRadius: 5,
+                      }}
+                    >
+                      <CardContent>
+                        <Typography
+                          sx={{ fontSize: 14 }}
+                          color="text.secondary"
+                          gutterBottom
+                        >
+                          Word of the Day
+                        </Typography>
+
+                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                          adjective
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid> */}
+                </Grid>
+              </Grid>
+              <Grid item xs>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  Calender
+                </Typography>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateCalendar />
+                </LocalizationProvider>
               </Grid>
             </Grid>
           </Box>
